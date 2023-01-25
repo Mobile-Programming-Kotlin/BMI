@@ -3,10 +3,7 @@ package com.example.bmi
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
@@ -44,8 +41,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Bmi() {
     var heightInput: String by remember { mutableStateOf("") }
+    var weightInput: String by remember { mutableStateOf("") }
 
-    Column() {
+    Column(
+        modifier = Modifier.padding(8.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         Text(
             text = "Body mass index",
             fontSize = 24.sp,
@@ -60,7 +61,16 @@ fun Bmi() {
             onValueChange = {heightInput = it.replace(",",".")},
             label = { Text("Height")},
             singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = weightInput,
+            onValueChange = {weightInput = it.replace(",",".")},
+            label = {Text("Weight")},
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            modifier = Modifier.fillMaxWidth()
         )
     }
 }
